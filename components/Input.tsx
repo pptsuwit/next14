@@ -27,7 +27,7 @@ export default function Input(props: Props) {
     <div>
       <input
         className="w-full py-2 px-3 shadow 
-        focus:outline-none focus:border-blue-400 focus:border-2 border rounded 
+        focus:outline-none focus:border-theme-400 focus:border-2 border rounded 
         text-gray-700
         bg-white 
         "
@@ -36,7 +36,11 @@ export default function Input(props: Props) {
         placeholder={props.placeholder}
         {...props.register}
       ></input>
-      {props.errors?.[props.name] && <p className="text-red-500 text-sm">{props.errors?.[props.name]?.message}</p>}
+      {props.errors?.[props.name] && (
+        <p className="text-red-500 text-sm">
+          {props.errors?.[props.name]?.message}
+        </p>
+      )}
     </div>
   );
 }
