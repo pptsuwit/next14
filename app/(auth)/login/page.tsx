@@ -1,4 +1,6 @@
 "use client";
+import { useEffect } from "react";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { loginSchema } from "@/zodSchema/loginSchema";
@@ -7,11 +9,25 @@ type FormData = z.infer<typeof loginSchema>;
 
 import { authService } from "@/services/auth.service";
 import httpService from "@/utils/axios";
+import { setCookie } from "cookies-next";
+import { getCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 
 import Input from "@/components/Input";
-import { setCookie } from "cookies-next";
+import { useGlobalContext } from "@/contexts/store";
+import { getModalMessage } from "@/utils/helpers";
 export default function page() {
+  const router = useRouter();
+  const { setModal, setModalMessage, setLoading } = useGlobalContext();
+
+  useEffect(() => {
+    if (getCookie(process.env.TOKEN_NAME as string) !== undefined) {
+      router.replace("/");
+    }
+    // default email and password
+    reset({ email: "", password: "" });
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -21,6 +37,7 @@ export default function page() {
     resolver: zodResolver(loginSchema),
   });
   async function onSubmit(data: FormData) {
+    setLoading(true);
     try {
       await authService.login(data.email, data.password).then(async (item: ILoginResponse) => {
         const { token } = item.data;
@@ -28,33 +45,40 @@ export default function page() {
           setCookie(process.env.TOKEN_NAME as string, token);
           httpService.defaults.headers.common["authorization"] = `Bearer ${token}`;
           // localStorage.setItem(process.env.TOKEN_NAME as string, token);
-          useRouter().push("/dashboard");
+          router.replace("/");
+          setLoading(false);
         }
       });
     } catch (error) {
       console.log("login error : ", error);
-      //       setModal(true);
-      //       setModalMessage(getModalMessage("error", err));
+      setModal(true);
+      setModalMessage(getModalMessage("error", error as string));
+      setLoading(false);
     }
   }
   return (
-    <div className="dark:bg-none flex items-center justify-center h-screen">
-      <div className="bg-white p-8 rounded-lg shadow-md shadow-slate-300 w-full sm:w-96">
-        <h1 className="text-5xl text-center text-blue-500 font-semibold mb-6">Welcome</h1>
+    <div className="flex items-center justify-center h-screen">
+      <div className="shadow-lg shadow-slate-300 p-8 rounded-lg w-full sm:w-96">
+        <h1 className="text-5xl text-center text-blue-600 font-semibold mb-6">Welcome</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <label className="block text-gray-700 text-md font-bold mb-2" htmlFor="email">
               Email
             </label>
-            <Input id="email" type="text" placeholder="Email" register={register("email", { required: true })}></Input>
-            {errors?.email && <p className="text-red-500 text-sm">{errors?.email?.message}</p>}
+            <Input id="email" name="email" type="text" placeholder="Email" register={register("email", { required: true })} errors={errors}></Input>
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-md font-bold mb-2" htmlFor="password">
               Password
             </label>
-            <Input id="password" type="password" placeholder="Password" register={register("password", { required: true })}></Input>
-            {errors?.password && <p className="text-red-500 text-sm">{errors?.password?.message}</p>}
+            <Input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Password"
+              register={register("password", { required: true })}
+              errors={errors}
+            ></Input>
           </div>
           <div className="mb-4 ">
             <button

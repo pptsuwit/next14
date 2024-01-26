@@ -1,23 +1,20 @@
 "use client";
 import { useGlobalContext } from "@/contexts/store";
 
-// import Modal from "@/components/baseComponent/Modal";
-// import PageProvider from "@/components/helpers/PageProvider";
-// import { ThemeProvider } from "next-themes";
-
-// // import { createTheme, ThemeProvider } from "@mui/material/styles";
-// import { createTheme } from "@mui/material/styles";
+import Loading from "@/components/Loading";
+import Modal from "@/components/Modal";
+import Sample from "@/components/Sample";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
-  const { modal, setModal, modalMessage } = useGlobalContext();
+  const { modal, loading } = useGlobalContext();
   return (
     <>
-      <div>Modal</div>
-      {/* <PageProvider> */}
-      {/* <Modal open={modal} handleClose={() => setModal(false)} body={modalMessage}></Modal> */}
+      {/* <Modal></Modal> */}
+      {/* <Loading></Loading> */}
+      {/* <Sample></Sample> */}
+      {modal && <Modal></Modal>}
+      {loading && <Loading></Loading>}
       {children}
-      {/* </PageProvider> */}
     </>
   );
-  // return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 }
