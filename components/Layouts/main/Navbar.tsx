@@ -8,10 +8,13 @@ import Link from "next/link";
 import { deleteCookie } from "cookies-next";
 const Navbar = () => {
   const { drawer, setDrawer } = useGlobalContext();
-  const [profileImage, setProfileImage] = useState(defaultImage.src);
   const [menu, setMenu] = useState(false);
-  const name = "t3t";
-  const email = "github.com/pptsuwit";
+
+  const [user, setUser] = useState({
+    email: "",
+    name: "",
+    image: defaultImage.src,
+  });
 
   const ref = useRef<any>(null);
   function handleClickOutside(event: MouseEvent) {
@@ -20,24 +23,23 @@ const Navbar = () => {
     }
   }
   useEffect(() => {
+    const userAcc = JSON.parse(localStorage.getItem("user") as string);
+    if (userAcc) {
+      const name = `${userAcc.firstName} `;
+      const email = userAcc.username;
+      const image = userAcc.assetFile;
+      setUser({ name, email, image });
+    }
     document.addEventListener("mousedown", handleClickOutside);
-    // return () => {
-    //   // Unbind the event listener on clean up
-    //   document.removeEventListener("mousedown", handleClickOutside);
-    // };
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   const menuList = [
     { name: "Home", link: "/" },
-    { name: "Profile", link: "https://github.com/pptsuwit" },
-    {
-      name: "Repository",
-      link: "https://github.com/pptsuwit?tab=repositories",
-    },
-    {
-      name: "Dashboard",
-      link: "/dashboard",
-    },
+    { name: "Github Profile", link: "https://github.com/pptsuwit" },
   ];
   const liMenuList = menuList.map((item, index) => {
     return (
@@ -58,16 +60,12 @@ const Navbar = () => {
     deleteCookie(process.env.TOKEN_NAME as string);
     window.location.reload();
   }
-  useEffect(() => {
-    // setProfileImage("https://picsum.photos/200/300.jpg");
-    // setProfileImage("https://picsum.photos/id/237/200/300.jpg");
-  }, []);
 
   return (
     <>
       <nav className="bg-white border-gray-200 shadow-md">
-        {/* <div className="w-screen-xl flex flex-wrap items-center justify-between mx-auto py-2 "> */}
-        <div className="w-screen-xl flex items-center  py-2 ">
+        <div className="w-screen flex items-center  py-2 ">
+          {/* Logo */}
           <div className="flex xs:w-16 sm:w-64 px-2">
             <div>
               <button
@@ -91,9 +89,11 @@ const Navbar = () => {
               </Link>
             </div>
           </div>
+          {/* Title */}
           <div className="flex xs:w-[calc(100%-8rem)] sm:w-[calc(100%-20rem)] px-8 xs:justify-center sm:justify-start">
             <span className="text-3xl">Title</span>
           </div>
+          {/* Avatar Menu */}
           <div className="flex xs:w-16 sx:w-16  items-center">
             <button
               type="button"
@@ -105,8 +105,8 @@ const Navbar = () => {
                 <Image
                   unoptimized={true}
                   priority={true}
-                  loader={() => profileImage}
-                  src={profileImage}
+                  loader={() => user.image}
+                  src={user.image}
                   // width={500}
                   // height={500}
                   fill={true}
@@ -122,10 +122,10 @@ const Navbar = () => {
               >
                 <div className="px-4 py-3 ">
                   <span className="block text-sm text-theme-500 font-bold">
-                    {name}
+                    {user.name}
                   </span>
                   <span className="block text-sm  text-gray-500 truncate font-bold">
-                    {email}
+                    {user.email}
                   </span>
                 </div>
                 <ul className="py-2" aria-labelledby="user-menu-button">
