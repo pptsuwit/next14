@@ -15,7 +15,7 @@ const Navbar = () => {
     show: false,
     title: "Sign Out",
     message: "Are you sure you want to sign out?",
-    iconType: "error",
+    iconType: "warning",
     confirm: signOut,
     cancle: function () {
       setDialog((prev) => ({

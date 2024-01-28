@@ -71,7 +71,7 @@ export default function page() {
   }
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="shadow-lg shadow-slate-300 p-8 rounded-lg w-full sm:w-96">
+      <div className="bg-white border border-gray-200 shadow-lg p-8 rounded-lg w-full sm:w-96">
         <h1 className="text-5xl text-center text-theme-600 font-semibold mb-6">
           Welcome
         </h1>
