@@ -6,10 +6,24 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { deleteCookie } from "cookies-next";
+import Dialog from "@/components/Dialog";
 const Navbar = () => {
   const { drawer, setDrawer } = useGlobalContext();
   const [menu, setMenu] = useState(false);
 
+  const [dialog, setDialog] = useState({
+    show: false,
+    title: "Sign Out",
+    message: "Are you sure you want to sign out?",
+    iconType: "error",
+    confirm: signOut,
+    cancle: function () {
+      setDialog((prev) => ({
+        ...prev,
+        show: false,
+      }));
+    },
+  });
   const [user, setUser] = useState({
     email: "",
     name: "",
@@ -55,14 +69,18 @@ const Navbar = () => {
     );
   });
 
-  function signOut() {
+  function signOut(status: boolean) {
+    if (!status) return;
+    dialog.cancle();
     localStorage.removeItem(process.env.TOKEN_NAME as string);
+    localStorage.removeItem("user");
     deleteCookie(process.env.TOKEN_NAME as string);
     window.location.reload();
   }
 
   return (
     <>
+      <Dialog {...dialog} />
       <nav className="bg-white border-gray-200 shadow-md">
         <div className="w-screen flex items-center  py-2 ">
           {/* Logo */}
@@ -132,7 +150,12 @@ const Navbar = () => {
                   {liMenuList}
                   <li>
                     <a
-                      onClick={signOut}
+                      onClick={() =>
+                        setDialog((prev) => ({
+                          ...prev,
+                          show: true,
+                        }))
+                      }
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
                       Sign out
