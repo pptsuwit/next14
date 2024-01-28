@@ -19,10 +19,17 @@ interface IUserTable {
 }
 
 interface IUserLogin {
-  username: string;
   token: string;
+  user: UserResponse;
 }
 
+interface UserResponse {
+  id?: string;
+  firstName: string;
+  lastName: string;
+  username: string;
+  assetFile: string;
+}
 interface ILoginResponse {
   data: IUserLogin;
 }

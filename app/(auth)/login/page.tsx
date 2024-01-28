@@ -43,13 +43,13 @@ export default function page() {
         authService
           .login(data.email, data.password)
           .then(async (item: ILoginResponse) => {
-            const { token } = item.data;
+            const { token, user } = item.data;
             if (token) {
               setCookie(process.env.TOKEN_NAME as string, token);
               httpService.defaults.headers.common[
                 "authorization"
               ] = `Bearer ${token}`;
-              // localStorage.setItem(process.env.TOKEN_NAME as string, token);
+              localStorage.setItem("user", JSON.stringify(user));
               router.replace("/");
             }
           }),
