@@ -76,7 +76,7 @@ export default function Drawer() {
             <li key={index}>
               <button
                 onClick={() => toggleSubmenu(item)}
-                className="flex items-center w-full p-2 text-base text-gray-900  rounded-lg group hover:bg-gray-100 transition duration-75"
+                className="flex items-center w-full xs:px-8 sm:px-2 p-2 text-base text-gray-900  rounded-lg group hover:bg-gray-100 transition duration-75 ease-in-out"
               >
                 {item.icon}
                 <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">
@@ -91,7 +91,7 @@ export default function Drawer() {
                       <li key={subIndex}>
                         <Link
                           href={subMenu.link}
-                          className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 "
+                          className="flex items-center w-full p-2 xs:pl-24 sm:pl-11 text-gray-900 transition duration-75 ease-in-out rounded-lg  group hover:bg-gray-100"
                         >
                           {subMenu.icon}
                           <span className="ms-3">{subMenu.name}</span>
@@ -108,7 +108,7 @@ export default function Drawer() {
             <li key={index}>
               <Link
                 href={item.link}
-                className="flex items-center  p-2 text-gray-900 rounded-lg hover:bg-gray-100  group"
+                className="flex items-center xs:px-8 sm:px-2 p-2 text-gray-900 rounded-lg hover:bg-gray-100 group "
               >
                 {item.icon}
                 <span className="ms-3">{item.name}</span>
@@ -137,13 +137,13 @@ export default function Drawer() {
   }
   return (
     <>
-      <div
+      <aside
         id="drawer-navigation"
-        className={`h-[calc(100svh-4rem)] p-4 bg-white w-64 shadow-md transition-transform  overflow-y-auto border-t-2
-         ${drawer ? "relative " : "absolute -translate-x-full"} 
+        className={`h-[calc(100svh-4rem)] p-4 bg-white xs:w-screen sm:w-64 shadow-md transition-transform  overflow-y-auto border-t-2
+         ${drawer ? "fixed" : "absolute -translate-x-full"} 
          `}
       >
-        <h5 className="text-base font-semibold text-gray-500 uppercase">
+        <h5 className="text-base xs:text-center sm:text-left font-semibold text-gray-500 uppercase">
           Menu
         </h5>
         <button
@@ -157,7 +157,7 @@ export default function Drawer() {
           <span className="sr-only">Close menu</span>
         </button>
         <div className="py-4 overflow-y-auto">{uiMenu}</div>
-      </div>
+      </aside>
     </>
   );
 }

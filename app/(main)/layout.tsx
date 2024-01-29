@@ -11,9 +11,5 @@ export default function AuthLayouts({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div className="main">
-      <Layouts.Main>{children}</Layouts.Main>
-    </div>
-  );
+  return <Layouts.Main>{children}</Layouts.Main>;
 }

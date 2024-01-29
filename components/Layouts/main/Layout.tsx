@@ -8,11 +8,8 @@ const MainLayout = ({ children }: PropsWithChildren) => {
   return (
     <>
       <Navbar />
-      <main className="flex">
-        <Drawer />
-        {/* {drawer && <Drawer />} */}
-        {children}
-      </main>
+      <Drawer />
+      <div className="p-4">{children}</div>
     </>
   );
 };

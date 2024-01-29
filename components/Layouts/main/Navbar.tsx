@@ -82,7 +82,7 @@ const Navbar = () => {
     <>
       <Dialog {...dialog} />
       <nav className="bg-white border-gray-200 shadow-md">
-        <div className="w-screen flex items-center  py-2 ">
+        <div className="flex items-center py-2">
           {/* Logo */}
           <div className="flex xs:w-16 sm:w-64 px-2">
             <div>
@@ -112,7 +112,7 @@ const Navbar = () => {
             <span className="text-3xl">Title</span>
           </div>
           {/* Avatar Menu */}
-          <div className="flex xs:w-16 sx:w-16  items-center">
+          <div className="flex items-center">
             <button
               type="button"
               className="flex text-sm rounded-full ring-2 ring-theme-500"

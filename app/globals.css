@@ -3,16 +3,8 @@
 @tailwind utilities;
 
 body {
-  /* background: #ebe8e2; */
   background: #f3f3fd;
-}
-
-.primary {
-  color: #6357b2;
-}
-.secondary {
-  color: #d5a4bc;
-}
-.danger {
-  color: #c27a80;
+  height: 100%;
+  width: 100%;
+  margin: 0;
 }
