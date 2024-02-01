@@ -2,7 +2,7 @@
 
 import { useGlobalContext } from "@/contexts/store";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import {
   AiOutlinePieChart,
@@ -19,7 +19,7 @@ import {
 export default function Drawer() {
   const { drawer, setDrawer } = useGlobalContext();
   const iconSize = { fontSize: 25 };
-  let list = [
+  const [menu, setMenu] = useState([
     {
       name: "Dashboard",
       icon: <AiOutlinePieChart {...iconSize} />,
@@ -65,8 +65,7 @@ export default function Drawer() {
       icon: <AiOutlineTeam {...iconSize} />,
       link: "/users",
     },
-  ];
-  const [menu, setMenu] = useState(list);
+  ]);
   const uiMenu = (
     <ul className="space-y-2 font-medium">
       {menu.map((item, index) => {

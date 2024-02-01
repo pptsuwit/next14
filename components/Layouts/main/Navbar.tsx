@@ -8,7 +8,7 @@ import Link from "next/link";
 import { deleteCookie } from "cookies-next";
 import Dialog from "@/components/Dialog";
 const Navbar = () => {
-  const { drawer, setDrawer } = useGlobalContext();
+  const { title, drawer, setDrawer } = useGlobalContext();
   const [menu, setMenu] = useState(false);
 
   const [dialog, setDialog] = useState({
@@ -109,7 +109,7 @@ const Navbar = () => {
           </div>
           {/* Title */}
           <div className="flex xs:w-[calc(100%-8rem)] sm:w-[calc(100%-20rem)] px-8 xs:justify-center sm:justify-start">
-            <span className="text-3xl">Title</span>
+            <span className="text-3xl">{title}</span>
           </div>
           {/* Avatar Menu */}
           <div className="flex items-center">

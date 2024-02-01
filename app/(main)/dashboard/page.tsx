@@ -8,7 +8,10 @@ import {
   AiOutlineBuild,
   AiOutlineDown,
 } from "react-icons/ai";
+import { useGlobalContext } from "@/contexts/store";
 export default function page() {
+  useGlobalContext().setTitle("Dashboard");
+
   const [show, setShow] = useState(false);
   return (
     <>

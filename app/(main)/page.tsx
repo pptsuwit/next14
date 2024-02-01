@@ -1,4 +1,8 @@
+"use client";
+import { useGlobalContext } from "@/contexts/store";
+
 export default function Home() {
+  useGlobalContext().setTitle("Home");
   return (
     <section className="p-4 bg-white border rounded-md shadow-md">
       <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">

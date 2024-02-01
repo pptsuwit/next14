@@ -17,6 +17,7 @@ interface ContextProps {
   setUserId: Dispatch<SetStateAction<string>>;
   data: DataType[];
   setData: Dispatch<SetStateAction<DataType[]>>;
+
   modal: boolean;
   setModal: Dispatch<SetStateAction<boolean>>;
   modalMessage: IModalMessage;
@@ -27,6 +28,9 @@ interface ContextProps {
 
   drawer: boolean;
   setDrawer: Dispatch<SetStateAction<boolean>>;
+
+  title: string;
+  setTitle: Dispatch<SetStateAction<string>>;
 }
 
 const GlobalContext = createContext<ContextProps>({
@@ -46,6 +50,8 @@ const GlobalContext = createContext<ContextProps>({
   setLoading: (): boolean => false,
   drawer: false,
   setDrawer: (): boolean => false,
+  title: "",
+  setTitle: (): string => "",
 });
 
 export const GlobalContextProvider = ({
@@ -59,6 +65,7 @@ export const GlobalContextProvider = ({
   const [modalMessage, setModalMessage] = useState(getModalMessage());
   const [loading, setLoading] = useState(false);
   const [drawer, setDrawer] = useState(false);
+  const [title, setTitle] = useState("");
 
   return (
     <GlobalContext.Provider
@@ -75,6 +82,8 @@ export const GlobalContextProvider = ({
         setLoading,
         drawer,
         setDrawer,
+        title,
+        setTitle,
       }}
     >
       {children}
