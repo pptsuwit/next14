@@ -9,7 +9,7 @@ const MainLayout = ({ children }: PropsWithChildren) => {
     <>
       <Navbar />
       <Drawer />
-      <div className="p-4">{children}</div>
+      <div className="p-4 pt-20">{children}</div>
     </>
   );
 };

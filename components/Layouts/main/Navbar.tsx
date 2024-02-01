@@ -81,7 +81,7 @@ const Navbar = () => {
   return (
     <>
       <Dialog {...dialog} />
-      <nav className="bg-white border-gray-200 shadow-md">
+      <nav className="bg-white border-gray-200 shadow-md fixed w-full h-16">
         <div className="flex items-center py-2">
           {/* Logo */}
           <div className="flex xs:w-16 sm:w-64 px-2">
