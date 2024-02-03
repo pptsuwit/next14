@@ -153,7 +153,7 @@ export default function Drawer() {
     <>
       <aside
         id="drawer-navigation"
-        className={`h-[calc(100svh-4rem)] p-4 bg-white xs:w-screen sm:w-64 shadow-md transition-transform overflow-y-auto border-t-2 fixed top-16
+        className={`h-[calc(100svh-4rem)] p-4 bg-white xs:w-screen sm:w-64 shadow-md transition-transform overflow-y-auto border-t-2 fixed top-16 
          ${drawer ? "" : "-translate-x-full"} 
          `}
       >

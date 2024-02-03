@@ -1,8 +1,12 @@
 "use client";
 
 import { useGlobalContext } from "@/contexts/store";
+import { useEffect } from "react";
 
 export default function page() {
-  useGlobalContext().setTitle("Customer Management");
+  const { setTitle } = useGlobalContext();
+  useEffect(() => {
+    setTitle("Customer Management");
+  }, []);
   return <div>page</div>;
 }

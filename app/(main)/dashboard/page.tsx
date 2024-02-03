@@ -15,6 +15,7 @@ import {
 import { Bar, Line, Pie } from "react-chartjs-2";
 
 import { faker } from "@faker-js/faker";
+import { useEffect } from "react";
 ChartJS.register(
   LineElement,
   PointElement,
@@ -98,7 +99,10 @@ export const dataPie = {
   ],
 };
 export default function page() {
-  useGlobalContext().setTitle("Dashboard");
+  const { setTitle } = useGlobalContext();
+  useEffect(() => {
+    setTitle("Dashboard");
+  }, []);
 
   return (
     <>
