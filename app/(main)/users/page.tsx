@@ -50,9 +50,9 @@ export default function page() {
       <Pagination
         pagination={{
           currentPage: currentPage,
-          recordPerPage: 10,
+          // recordPerPage: 10,
           totalPage: 10,
-          totalRecord: 150,
+          // totalRecord: 0,
         }}
         setCurrentPage={setCurrentPage}
       />
