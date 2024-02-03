@@ -109,7 +109,7 @@ const Navbar = () => {
           </div>
           {/* Title */}
           <div className="flex xs:w-[calc(100%-8rem)] sm:w-[calc(100%-20rem)] px-8 xs:justify-center sm:justify-start">
-            <span className="text-3xl">{title}</span>
+            <span className="xs:text-xl md:text-3xl">{title}</span>
           </div>
           {/* Avatar Menu */}
           <div className="flex items-center">

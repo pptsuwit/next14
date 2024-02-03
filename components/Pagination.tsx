@@ -109,7 +109,8 @@ export default function Pagination(props: Pagination) {
           <button
             onClick={() => handleCurrnetPage(index)}
             type="button"
-            className={`font-medium rounded-full text-sm text-center inline-flex items-center h-10 w-10 mx-1 border
+            className={`font-medium rounded-full text-sm text-center inline-flex items-center mx-1 border
+            xs:h-7 xs:w-7 md:h-10 md:w-10
            ${currentPage === index ? activeBtnClass : inactiveBtnClass}`}
           >
             <span className="overflow-ellipsis mx-auto">{index}</span>
@@ -122,14 +123,14 @@ export default function Pagination(props: Pagination) {
   return (
     <>
       {totalPage > 0 && (
-        <nav className="flex justify-center my-2 w-full px-6">
-          <ul className="flex items-center -space-x-px h-10 text-base">
+        <nav className="flex justify-center my-2 ">
+          <ul className="flex items-center -space-x-px h-10 text-base float-left">
             <li>
               <button
                 disabled={currentPage === 1}
                 onClick={handlePreviousPage}
                 type="button"
-                className={`bg-white font-medium rounded-full text-sm flex items-center justify-center h-10 w-10 mx-1 border 
+                className={`bg-white font-medium rounded-full text-sm flex items-center justify-center xs:h-7 xs:w-7 md:h-10 md:w-10 mx-1 border 
               ${
                 currentPage === 1
                   ? "text-gray-300 border-gray-300 "
@@ -147,7 +148,7 @@ export default function Pagination(props: Pagination) {
                   disabled={currentPage === 1}
                   onClick={() => handleCurrnetPage(1)}
                   type="button"
-                  className={`bg-white font-medium rounded-full text-sm flex items-center justify-center h-10 w-10 mx-1 border 
+                  className={`bg-white font-medium rounded-full text-sm flex items-center justify-center xs:h-7 xs:w-7 md:h-10 md:w-10 mx-1 border 
               ${
                 currentPage === 1
                   ? "text-gray-300 border-gray-300 "
@@ -166,7 +167,7 @@ export default function Pagination(props: Pagination) {
                 onClick={() => handleCurrnetPage(totalPage)}
                 disabled={currentPage === totalPage}
                 type="button"
-                className={`font-medium rounded-full text-sm flex items-center justify-center h-10 w-10 mx-1 border 
+                className={`font-medium rounded-full text-sm flex items-center justify-center xs:h-7 xs:w-7 md:h-10 md:w-10 mx-1 border 
               ${currentPage === totalPage ? activeBtnClass : inactiveBtnClass} 
               `}
               >
@@ -179,7 +180,7 @@ export default function Pagination(props: Pagination) {
                 onClick={handleNextPage}
                 disabled={currentPage === totalPage}
                 type="button"
-                className={`bg-white font-medium rounded-full text-sm flex items-center justify-center h-10 w-10 mx-1 border 
+                className={`bg-white font-medium rounded-full text-sm flex items-center justify-center xs:h-7 xs:w-7 md:h-10 md:w-10 mx-1 border 
               ${
                 currentPage === totalPage
                   ? "text-gray-300 border-gray-300 "
