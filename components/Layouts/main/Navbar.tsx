@@ -52,7 +52,7 @@ const Navbar = () => {
   }, []);
 
   const menuList = [
-    { name: "Home", link: "/" },
+    { name: "Home", link: "/backoffice" },
     { name: "Github Profile", link: "https://github.com/pptsuwit" },
   ];
   const liMenuList = menuList.map((item, index) => {

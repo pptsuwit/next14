@@ -2,12 +2,27 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
+  const pathName = request.nextUrl.pathname;
   try {
-    const token = request.cookies.get(process.env.TOKEN_NAME as string);
-    if (token) return NextResponse.next();
-    else return NextResponse.redirect(new URL("/login", request.url));
+    // if (pathName === "/") return NextResponse.next(); //allow root path
+
+    //middleware protect backoffice
+    if (pathName.includes("/backoffice")) {
+      const token = request.cookies.get(process.env.TOKEN_NAME as string);
+      if (token) return NextResponse.next();
+      else
+        return NextResponse.redirect(
+          new URL(process.env.REDIRECT_TO_LOGIN as string, request.url)
+        );
+    }
   } catch (err) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    if (pathName.includes("/backoffice")) {
+      return NextResponse.redirect(
+        new URL(process.env.REDIRECT_TO_LOGIN as string, request.url)
+      );
+    } else {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
   }
 }
 
@@ -20,9 +35,9 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
-     * - regiser page
-     * - login page
+     * - backoffice/regiser page
+     * - backoffice/login page
      */
-    "/((?!api|_next/static|_next/image|favicon.ico|login|register|darkmode).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|darkmode|backoffice/login|backoffice/register).*)",
   ],
 };

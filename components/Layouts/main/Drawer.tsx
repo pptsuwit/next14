@@ -24,22 +24,22 @@ export default function Drawer() {
     {
       name: "Dashboard",
       icon: <AiOutlinePieChart {...iconSize} />,
-      link: "/dashboard",
+      link: "/backoffice/dashboard",
     },
     {
       name: "Users",
       icon: <AiOutlineTeam {...iconSize} />,
-      link: "/users",
+      link: "/backoffice/users",
     },
     {
       name: "Customer",
       icon: <AiOutlineIdcard {...iconSize} />,
-      link: "/customers",
+      link: "/backoffice/customers",
     },
     {
       name: "E-commerce (Example Dropdown Menu)",
       icon: <AiOutlineShoppingCart {...iconSize} />,
-      // link: "/e-commerce",
+      // link: "/backoffice/e-commerce",
       active: false,
       subMenu: [
         {

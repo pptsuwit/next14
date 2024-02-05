@@ -50,7 +50,7 @@ export default function page() {
                 "authorization"
               ] = `Bearer ${token}`;
               localStorage.setItem("user", JSON.stringify(user));
-              router.replace("/");
+              router.replace("/backoffice");
             }
           }),
         {
@@ -121,7 +121,10 @@ export default function page() {
         <div className="mt-4 text-center">
           <p className="text-sm text-gray-600 font-bold">
             Don't have an account?{" "}
-            <a href="/register" className="text-indigo-500 hover:underline">
+            <a
+              href="/backoffice/register"
+              className="text-indigo-500 hover:underline"
+            >
               Register
             </a>
           </p>

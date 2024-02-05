@@ -2,13 +2,11 @@
 import { useGlobalContext } from "@/contexts/store";
 import { useEffect } from "react";
 
-export default function Home() {
+export default function page() {
   const { setTitle } = useGlobalContext();
   useEffect(() => {
-    setTitle("Home");
+    setTitle("");
   }, []);
-
-  setTitle("Home");
   return (
     <section className="p-4 bg-white border rounded-md shadow-md">
       <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
