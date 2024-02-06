@@ -41,7 +41,7 @@ const Navbar = () => {
     if (userAcc) {
       const name = `${userAcc.firstName} `;
       const email = userAcc.username;
-      const image = userAcc.assetFile;
+      const image = userAcc.assetFile || defaultImage.src;
       setUser({ name, email, image });
     }
     document.addEventListener("mousedown", handleClickOutside);
