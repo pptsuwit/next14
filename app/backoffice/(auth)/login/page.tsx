@@ -23,7 +23,7 @@ export default function page() {
 
   useEffect(() => {
     if (getCookie(process.env.TOKEN_NAME as string) !== undefined) {
-      router.replace("/");
+      router.replace("/backoffice");
     }
     // default email and password
     reset({ email: "", password: "" });

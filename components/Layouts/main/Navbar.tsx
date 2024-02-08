@@ -81,7 +81,7 @@ const Navbar = () => {
   return (
     <>
       <Dialog {...dialog} />
-      <nav className="bg-white border-gray-200 shadow-md fixed w-full h-16">
+      <nav className="bg-white border-gray-200 shadow-md fixed w-full h-16 z-40">
         <div className="flex items-center py-2">
           {/* Logo */}
           <div className="flex xs:w-16 sm:w-64 px-2">
@@ -136,7 +136,7 @@ const Navbar = () => {
             {menu && (
               <div
                 ref={ref}
-                className="absolute top-11 right-5  my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow "
+                className="absolute top-11 right-5 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow"
               >
                 <div className="px-4 py-3 ">
                   <span className="block text-sm text-theme-500 font-bold">

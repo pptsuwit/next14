@@ -5,8 +5,8 @@ const MainLayout = ({ children }: PropsWithChildren) => {
   return (
     <>
       <Navbar />
-      <div className="p-4 pt-20">{children}</div>
       <Drawer />
+      <div className="p-4 pt-20 z-0">{children}</div>
     </>
   );
 };
