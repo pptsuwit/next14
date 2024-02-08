@@ -7,10 +7,17 @@ class userServices {
     return httpService.get("/profile");
   }
 
-  public gets(page?: IPage): Promise<IResponseData<IUser>> {
-    return httpService.get(`${path}?page=${page?.page}&pageSize=${page?.size}`);
+  public gets(
+    page: IPage = {
+      currentPage: 1,
+      recordPerPage: 10,
+    }
+  ): Promise<IResponseData<IUserResponse>> {
+    return httpService.get(
+      `${path}?page=${page?.currentPage}&pageSize=${page?.recordPerPage}`
+    );
   }
-  public getById(id: string): Promise<IResponse<IUserData>> {
+  public getById(id: string): Promise<IResponse<IUserResponse>> {
     return httpService.get(`${path}/${id}`);
   }
   public create(data: IUserData): Promise<IResponseData<IUser>> {

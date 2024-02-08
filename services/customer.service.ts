@@ -1,16 +1,23 @@
 import httpService from "@/utils/axios";
 const path = "/customer";
 class customerService {
-  public gets(page?: IPage): Promise<IResponseData<ICustomer>> {
-    return httpService.get(`${path}?page=${page?.page}&pageSize=${page?.size}`);
+  public gets(
+    page: IPage = {
+      currentPage: 1,
+      recordPerPage: 10,
+    }
+  ): Promise<IResponseData<ICustomer>> {
+    return httpService.get(
+      `${path}?page=${page?.currentPage}&pageSize=${page?.recordPerPage}`
+    );
   }
   public getById(id: string): Promise<IResponse<ICustomer>> {
     return httpService.get(`${path}/${id}`);
   }
-  public create(data: ICustomerData): Promise<IResponseData<ICustomer>> {
+  public create(data: ICustomer): Promise<IResponseData<ICustomer>> {
     return httpService.post(`${path}`, data);
   }
-  public update(data: ICustomerData): Promise<IResponseData<ICustomer>> {
+  public update(data: ICustomer): Promise<IResponseData<ICustomer>> {
     return httpService.put(`${path}`, data);
   }
   public delete(id: string): Promise<void> {
