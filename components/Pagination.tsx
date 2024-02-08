@@ -1,7 +1,7 @@
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 interface Pagination {
   pagination: IPagination;
-  setCurrentPage: (page: number) => void;
+  setCurrentPage: (page: IPagination) => void;
   sibling?: number;
 }
 export default function Pagination(props: Pagination) {
@@ -30,14 +30,27 @@ export default function Pagination(props: Pagination) {
 
   const handlePreviousPage = () => {
     if (currentPage === 1) return;
-    props.setCurrentPage(currentPage - 1);
+
+    // props.setCurrentPage(currentPage - 1);
+    props.setCurrentPage({
+      ...props.pagination,
+      currentPage: currentPage - 1,
+    });
   };
   const handleNextPage = () => {
     if (currentPage === totalPage) return;
-    props.setCurrentPage(currentPage + 1);
+    // props.setCurrentPage(currentPage + 1);
+    props.setCurrentPage({
+      ...props.pagination,
+      currentPage: currentPage - 1,
+    });
   };
   const handleCurrnetPage = (page: number) => {
-    props.setCurrentPage(page);
+    // props.setCurrentPage(page);
+    props.setCurrentPage({
+      ...props.pagination,
+      currentPage: page,
+    });
   };
   const getFirstPage = () => {
     let firstPage = 1;
@@ -123,7 +136,7 @@ export default function Pagination(props: Pagination) {
   return (
     <>
       {totalPage > 0 && (
-        <nav className="flex justify-center my-2 ">
+        <nav className="flex justify-center my-4 ">
           <ul className="flex items-center -space-x-px h-10 text-base float-left">
             <li>
               <button

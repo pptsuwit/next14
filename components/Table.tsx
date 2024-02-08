@@ -1,10 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import defaultImage from "@/assets/avatar.jpg";
+import Image from "next/image";
 
 interface TableHeader {
   name: string;
   align: string;
+  type?: string;
 }
 interface TableProps<T> {
   header: TableHeader[];
@@ -24,14 +27,32 @@ export default function Table<T extends object>(props: TableProps<T>) {
   const tableCells = data.map((cells, index) => {
     let cell;
     if (cells instanceof Array) {
-      cell = cells.map((c, cIndex) => {
+      cell = cells.map((item, cIndex) => {
+        const type = props.header[cIndex].type;
+        let input;
+        if (type === "image" || type === "img") {
+          input = (
+            <div className="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full">
+              <Image
+                unoptimized={true}
+                priority={true}
+                loader={() => item || defaultImage.src}
+                src={item || defaultImage.src}
+                fill={true}
+                alt="avatar"
+              />
+            </div>
+          );
+        } else {
+          input = <>{item}</>;
+        }
         return (
           <td
             scope="row"
             className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
             key={cIndex}
           >
-            {c}
+            {input}
           </td>
         );
       });

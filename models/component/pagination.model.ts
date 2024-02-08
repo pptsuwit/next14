@@ -11,6 +11,6 @@ interface IPagination {
   totalRecord?: number;
 }
 interface IPage {
-  page?: string;
-  size?: string;
+  currentPage?: number;
+  recordPerPage?: number;
 }
