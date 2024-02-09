@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import { deleteCookie, getCookie } from "cookies-next";
+import { toast } from "react-toastify";
 
 axios.defaults.headers.common["accept"] = "application/json";
 // axios.defaults.headers.common["authorization"] = `Bearer ${localStorage.getItem(process.env.TOKEN_NAME as string) || ""}`;
@@ -26,9 +27,14 @@ httpService.interceptors.response.use(
     const { data } = response;
     const errorMessage = data?.error || data?.message || data;
     if (response?.status === 401) {
-      localStorage.removeItem(process.env.TOKEN_NAME as string);
       deleteCookie(process.env.TOKEN_NAME as string);
-      window.location.replace("/backoffice");
+      localStorage.removeItem(process.env.TOKEN_NAME as string);
+      // window.location.replace("/backoffice");
+      // window.location.href = "/backoffice";
+      toast.warn(`Redirecting to login` as string, {
+        autoClose: 5000,
+        onClose: () => (window.location.href = "/backoffice/login"),
+      });
     } else {
       if (data.error) {
         return Promise.reject(data.error.message);

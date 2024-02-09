@@ -5,8 +5,10 @@ const MainLayout = ({ children }: PropsWithChildren) => {
   return (
     <>
       <Navbar />
-      <Drawer />
-      <div className="p-4 pt-20 z-0">{children}</div>
+      <div className="flex absolute z-0 pt-16 w-full">
+        <Drawer />
+        <div className="p-4 z-0 w-full">{children}</div>
+      </div>
     </>
   );
 };
