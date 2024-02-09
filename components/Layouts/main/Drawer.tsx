@@ -153,8 +153,8 @@ export default function Drawer() {
     <>
       <aside
         id="drawer-navigation"
-        className={`min-h-[calc(100svh-4rem)] p-4 bg-white xs:w-screen sm:w-64 shadow-md transition-transform overflow-y-auto border-t-2 z-40
-         ${drawer ? "" : "fixed -translate-x-full"} 
+        className={`min-h-[calc(100svh-4rem)] p-4 bg-white xs:w-screen sm:w-full min-w-72 sm:max-w-72 shadow-md transition-transform overflow-y-auto border-t-2 z-40
+         ${drawer ? "xs:fixed md:static" : "fixed -translate-x-full"} 
          `}
       >
         <div className="flex justify-between items-start pr-6 h-8">
