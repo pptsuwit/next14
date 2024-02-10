@@ -59,7 +59,6 @@ export default function page() {
         }
       );
     } catch (error) {
-      console.log("login error : ", error);
       // setModal(true);
       // setModalMessage(getModalMessage("error", error as string));
       // setLoading(false);

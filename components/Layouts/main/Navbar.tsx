@@ -6,24 +6,10 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { deleteCookie } from "cookies-next";
-import Dialog from "@/components/Dialog";
 const Navbar = () => {
-  const { title, drawer, setDrawer } = useGlobalContext();
+  const { title, drawer, setDrawer, setDialog, dialog } = useGlobalContext();
   const [menu, setMenu] = useState(false);
 
-  const [dialog, setDialog] = useState({
-    show: false,
-    title: "Sign Out",
-    message: "Are you sure you want to sign out?",
-    iconType: "warning",
-    confirm: signOut,
-    cancle: function () {
-      setDialog((prev) => ({
-        ...prev,
-        show: false,
-      }));
-    },
-  });
   const [user, setUser] = useState({
     email: "",
     name: "",
@@ -37,6 +23,20 @@ const Navbar = () => {
     }
   }
   useEffect(() => {
+    setDialog({
+      show: false,
+      title: "Sign Out",
+      message: "Are you sure you want to sign out?",
+      iconType: "warning",
+      confirm: signOut,
+      cancle: () => {
+        setDialog((prev) => ({
+          ...prev,
+          show: false,
+        }));
+      },
+    });
+
     const userAcc = JSON.parse(localStorage.getItem("user") as string);
     if (userAcc) {
       const name = `${userAcc.firstName} `;
@@ -80,7 +80,6 @@ const Navbar = () => {
 
   return (
     <>
-      <Dialog {...dialog} />
       <nav className="bg-white border-gray-200 shadow-md fixed w-full h-16 z-40">
         <div className="flex items-center py-2">
           {/* Logo */}

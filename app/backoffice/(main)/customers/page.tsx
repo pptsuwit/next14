@@ -62,7 +62,6 @@ export default function page() {
         setPagination(pagination);
       });
     } catch (error) {
-      console.log(error);
       toast.error(error as string, {
         autoClose: 3000,
       });
@@ -82,6 +81,7 @@ export default function page() {
   return (
     <>
       <Table
+        path="customers"
         header={header}
         data={dataTable}
         action={{

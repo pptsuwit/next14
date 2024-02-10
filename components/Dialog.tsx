@@ -16,11 +16,7 @@ export default function Dialog(props: IDialogProps) {
   return (
     <>
       {props.show && (
-        <div
-          id="popup-modal"
-          tabIndex={-1}
-          className="w-full h-full flex overflow-y-auto overflow-x-hidden absolute bottom-[calc(100%-75%)] right-0 left-0 z-50 justify-center items-center"
-        >
+        <div className="z-50 w-full h-full flex justify-center items-center overflow-y-auto overflow-x-hidden fixed bottom-[calc(100%-80%)]">
           <div className="relative p-4 w-full max-w-md max-h-full">
             <div className="relative bg-white rounded-lg shadow-2xl shadow-slate-400">
               <button

@@ -6,21 +6,17 @@ interface IUser {
   token: string;
 }
 interface IUserData {
-  id?: string;
   firstName: string;
   lastName: string;
   username: string;
   password?: string;
+  avatar?: string;
+  file?: File;
 }
 interface IUserTable {
   id: string;
   name: string;
   username: string;
-}
-
-interface IUserLogin {
-  token: string;
-  user: IUserResponse;
 }
 
 interface IUserResponse {
@@ -32,6 +28,11 @@ interface IUserResponse {
   createdAt: Date;
   updatedAt: Date;
 }
+
 interface ILoginResponse {
   data: IUserLogin;
+}
+interface IUserLogin {
+  token: string;
+  user: IUserResponse;
 }

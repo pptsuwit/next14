@@ -56,7 +56,19 @@ export default function page() {
         setPagination(pagination);
       });
     } catch (error) {
-      console.log(error);
+      toast.error(error as string, {
+        autoClose: 3000,
+      });
+    }
+  };
+  const deleteData = async (id: number) => {
+    try {
+      await toast.promise(userServices.delete(id), {
+        pending: "Waiting...",
+        success: "Delete data successfully",
+      });
+      getData();
+    } catch (error) {
       toast.error(error as string, {
         autoClose: 3000,
       });
@@ -65,6 +77,8 @@ export default function page() {
   return (
     <>
       <Table
+        createBtn={true}
+        path="users"
         header={header}
         data={dataTable}
         action={{
@@ -72,6 +86,7 @@ export default function page() {
           // edit: false,
           // delete: false,
         }}
+        onDelete={deleteData}
       />
       <Pagination
         pagination={{

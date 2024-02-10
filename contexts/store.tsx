@@ -11,7 +11,14 @@ import {
 type DataType = {
   firstName: string;
 };
-
+interface DialogState {
+  show: boolean;
+  title: string;
+  message: string;
+  iconType: string;
+  confirm: (data?: any) => void;
+  cancle: () => void;
+}
 interface ContextProps {
   userId: string;
   setUserId: Dispatch<SetStateAction<string>>;
@@ -31,6 +38,9 @@ interface ContextProps {
 
   title: string;
   setTitle: Dispatch<SetStateAction<string>>;
+
+  dialog: DialogState;
+  setDialog: Dispatch<SetStateAction<DialogState>>;
 }
 
 const GlobalContext = createContext<ContextProps>({
@@ -52,6 +62,23 @@ const GlobalContext = createContext<ContextProps>({
   setDrawer: (): boolean => false,
   title: "",
   setTitle: (): string => "",
+
+  dialog: {
+    show: false,
+    title: "",
+    message: "",
+    iconType: "",
+    confirm: (): void => {},
+    cancle: (): void => {},
+  },
+  setDialog: (): DialogState => ({
+    show: false,
+    title: "",
+    message: "",
+    iconType: "",
+    confirm: (): void => {},
+    cancle: (): void => {},
+  }),
 });
 
 export const GlobalContextProvider = ({
@@ -66,7 +93,19 @@ export const GlobalContextProvider = ({
   const [loading, setLoading] = useState(false);
   const [drawer, setDrawer] = useState(false);
   const [title, setTitle] = useState("");
-
+  const [dialog, setDialog] = useState({
+    show: false,
+    title: "",
+    message: "",
+    iconType: "warning",
+    confirm: () => {},
+    cancle: () => {
+      setDialog((prev) => ({
+        ...prev,
+        show: false,
+      }));
+    },
+  });
   return (
     <GlobalContext.Provider
       value={{
@@ -84,6 +123,8 @@ export const GlobalContextProvider = ({
         setDrawer,
         title,
         setTitle,
+        dialog,
+        setDialog,
       }}
     >
       {children}

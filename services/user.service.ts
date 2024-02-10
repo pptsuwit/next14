@@ -20,13 +20,29 @@ class userServices {
   public getById(id: string): Promise<IResponse<IUserResponse>> {
     return httpService.get(`${path}/${id}`);
   }
-  public create(data: IUserData): Promise<IResponseData<IUser>> {
-    return httpService.post(`${path}`, data);
+  public create(data: IUserData): Promise<IResponse<IUserResponse>> {
+    let formData = new FormData();
+    formData.append("username", data.username);
+    formData.append("firstName", data.firstName);
+    formData.append("lastName", data.lastName);
+    if (data.password) formData.append("password", data.password);
+    if (data.file) formData.append("file", data.file);
+    return httpService.post(`${path}`, formData);
   }
-  public update(data: IUserData): Promise<IResponseData<IUser>> {
-    return httpService.put(`${path}`, data);
+  public update(
+    id: string,
+    data: IUserData
+  ): Promise<IResponse<IUserResponse>> {
+    let formData = new FormData();
+    formData.append("id", id);
+    formData.append("username", data.username);
+    formData.append("firstName", data.firstName);
+    formData.append("lastName", data.lastName);
+    if (data.password) formData.append("password", data.password);
+    if (data.file) formData.append("file", data.file);
+    return httpService.put(`${path}`, formData);
   }
-  public delete(id: string): Promise<void> {
+  public delete(id: number): Promise<void> {
     return httpService.delete(`${path}/${id}`);
   }
 }

@@ -5,8 +5,9 @@ interface Props {
   name: string;
   type: string;
   placeholder: string;
-  register: HookRegister;
+  register?: HookRegister;
   errors?: any;
+  className?: string;
 }
 interface HookRegister {
   onChange: ChangeHandler;
@@ -26,11 +27,10 @@ export default function Input(props: Props) {
   return (
     <div>
       <input
-        className="w-full py-2 px-3 shadow 
+        className={`w-full py-2 px-3 shadow 
         focus:outline-none focus:border-theme-400 focus:border-2 border rounded 
         text-gray-700
-        bg-white 
-        "
+        bg-white ${props.className}`}
         id={props.id}
         type={props.type}
         placeholder={props.placeholder}
