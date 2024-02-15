@@ -77,10 +77,23 @@ export default function page() {
   //     recordPerPage: page.recordPerPage,
   //   });
   // };
-
+  const deleteData = async (id: number) => {
+    try {
+      await toast.promise(customerServices.delete(id), {
+        pending: "Waiting...",
+        success: "Delete data successfully",
+      });
+      getData();
+    } catch (error) {
+      toast.error(error as string, {
+        autoClose: 3000,
+      });
+    }
+  };
   return (
     <>
       <Table
+        createBtn={true}
         path="customers"
         header={header}
         data={dataTable}
@@ -89,6 +102,7 @@ export default function page() {
           // edit: false,
           // delete: false,
         }}
+        onDelete={deleteData}
       />
       <Pagination
         pagination={{

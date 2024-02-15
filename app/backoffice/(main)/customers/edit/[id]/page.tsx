@@ -1,31 +1,25 @@
 "use client";
 
-import UserForm from "@/components/backoffice/users/UserForm";
 import { useGlobalContext } from "@/contexts/store";
 import { useEffect, useState } from "react";
 
-import { schemaEdit } from "@/zodSchema/userSchema";
+import { schema } from "@/zodSchema/customerSchema";
 import { toast } from "react-toastify";
 
-import { service } from "@/services/user.service";
+import { service } from "@/services/customer.service";
+import CustomerForm from "@/components/backoffice/customers/CustomerForm";
 export default function page({ params }: { params: { id: string } }) {
-  const [user, setUser] = useState<IUserData>();
+  const [data, setData] = useState<ICustomer>();
   const { setTitle } = useGlobalContext();
   useEffect(() => {
-    setTitle("Edit User");
+    setTitle("Edit Customer");
     getUser(params.id);
   }, []);
   async function getUser(id: string) {
     try {
-      service.getById(id).then(async (response: IResponse<IUserResponse>) => {
+      service.getById(id).then(async (response: IResponse<ICustomer>) => {
         const { data } = response;
-        const userData: IUserData = {
-          firstName: data.firstName,
-          lastName: data.lastName,
-          username: data.username,
-          avatar: data.assetFile,
-        };
-        setUser(userData);
+        setData({ ...data });
       });
     } catch (error) {
       toast.error(error as string, {
@@ -33,24 +27,30 @@ export default function page({ params }: { params: { id: string } }) {
       });
     }
   }
-  async function onSubmit(data: IUserData) {
+  async function onSubmit(data: ICustomer) {
+    const updateData: ICustomer = {
+      id: Number(params.id),
+      ...data,
+    };
     try {
-      await toast.promise(service.update(params.id, data), {
+      await toast.promise(service.update(updateData), {
         pending: "Loading...",
         success: "Update user successful",
       });
     } catch (error) {
+      console.log(error);
       toast.error(error as string, {
         autoClose: 3000,
       });
     }
   }
   return (
-    <UserForm
-      schema={schemaEdit}
+    <CustomerForm
+      path="customers"
+      schema={schema}
       onSubmit={onSubmit}
-      data={user}
+      data={data}
       type="edit"
-    ></UserForm>
+    ></CustomerForm>
   );
 }

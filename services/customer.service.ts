@@ -18,9 +18,9 @@ class customerService {
     return httpService.post(`${path}`, data);
   }
   public update(data: ICustomer): Promise<IResponseData<ICustomer>> {
-    return httpService.put(`${path}`, data);
+    return httpService.put(`${path}/${data.id}`, data);
   }
-  public delete(id: string): Promise<void> {
+  public delete(id: number): Promise<void> {
     return httpService.delete(`${path}/${id}`);
   }
 }
