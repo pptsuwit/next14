@@ -42,7 +42,7 @@ export default function Pagination(props: Pagination) {
     // props.setCurrentPage(currentPage + 1);
     props.setCurrentPage({
       ...props.pagination,
-      currentPage: currentPage - 1,
+      currentPage: currentPage + 1,
     });
   };
   const handleCurrnetPage = (page: number) => {
