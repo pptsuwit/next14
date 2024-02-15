@@ -37,7 +37,8 @@ httpService.interceptors.response.use(
       });
     } else {
       if (data.error) {
-        return Promise.reject(data.error.message);
+        if (data.error.message) return Promise.reject(data.error.message);
+        return Promise.reject(data.error);
       } else if (data.message) {
         return Promise.reject(data.message);
       }
