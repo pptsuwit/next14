@@ -43,7 +43,6 @@ export default function CustomerForm(props: CustomerFormProps) {
   }, [props]);
 
   async function onSubmit(data: FormData) {
-    console.log(data);
     const customerData: ICustomer = {
       customerId: data.customerId,
       firstName: data.firstName,

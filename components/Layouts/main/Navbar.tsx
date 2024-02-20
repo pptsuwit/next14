@@ -5,7 +5,7 @@ import defaultImage from "@/assets/avatar.jpg";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { deleteCookie } from "cookies-next";
+import { authService } from "@/services/auth.service";
 const Navbar = () => {
   const { title, drawer, setDrawer, setDialog, dialog } = useGlobalContext();
   const [menu, setMenu] = useState(false);
@@ -22,20 +22,21 @@ const Navbar = () => {
       setMenu(false);
     }
   }
+  const defaultDialog = {
+    show: false,
+    title: "Sign Out",
+    message: "Are you sure you want to sign out?",
+    iconType: "warning",
+    confirm: signOut,
+    cancle: () => {
+      setDialog((prev) => ({
+        ...prev,
+        show: false,
+      }));
+    },
+  };
   useEffect(() => {
-    setDialog({
-      show: false,
-      title: "Sign Out",
-      message: "Are you sure you want to sign out?",
-      iconType: "warning",
-      confirm: signOut,
-      cancle: () => {
-        setDialog((prev) => ({
-          ...prev,
-          show: false,
-        }));
-      },
-    });
+    setDialog(defaultDialog);
 
     const userAcc = JSON.parse(localStorage.getItem("user") as string);
     if (userAcc) {
@@ -72,10 +73,7 @@ const Navbar = () => {
   function signOut(status: boolean) {
     if (!status) return;
     dialog.cancle();
-    localStorage.removeItem(process.env.TOKEN_NAME as string);
-    localStorage.removeItem("user");
-    deleteCookie(process.env.TOKEN_NAME as string);
-    window.location.reload();
+    authService.logout();
   }
 
   return (
@@ -150,8 +148,8 @@ const Navbar = () => {
                   <li>
                     <a
                       onClick={() =>
-                        setDialog((prev) => ({
-                          ...prev,
+                        setDialog(() => ({
+                          ...defaultDialog,
                           show: true,
                         }))
                       }

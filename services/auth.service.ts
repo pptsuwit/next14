@@ -1,7 +1,13 @@
 import httpService from "@/utils/axios";
+import { deleteCookie, getCookie } from "cookies-next";
 
 class AuthService {
-  public register(username: string, password: string, firstName: string, lastName: string): Promise<IUser> {
+  public register(
+    username: string,
+    password: string,
+    firstName: string,
+    lastName: string
+  ): Promise<IUser> {
     const schema = {
       username: username,
       password: password,
@@ -17,52 +23,12 @@ class AuthService {
     };
     return httpService.post("/login", schema);
   }
-  public logout(isRootAdmin: boolean): Promise<void> {
+  public logout() {
     localStorage.removeItem(process.env.TOKEN_NAME as string);
-
-    if (isRootAdmin) return httpService.post("/logout");
-    else return httpService.post("/logout");
+    localStorage.removeItem("user");
+    deleteCookie(process.env.TOKEN_NAME as string, {});
+    window.location.replace(process.env.REDIRECT_TO_LOGIN as string);
   }
-  // public forgotPassword(email: string): Promise<AxiosResponse> {
-  //   const callback = process.env.REACT_APP_CALLBACK_FORGOT_PASSOWRD;
-  //   return httpService.post("/forgot-password", { email, callback });
-  // }
-  // public changePassword(password: string, token: string): Promise<AxiosResponse> {
-  //   return httpService.post("/forgot-password/token", { password, token });
-  // }
-
-  // public getRootProfile(): Promise<AxiosResponse<Response>> {
-  //   return httpService.get<Response>("/profile");
-  // }
-  // public getUserProfile(): Promise<AxiosResponse<Response>> {
-  //   return httpService.get<Response>("/profile");
-  // }
-
-  // public updateRootProfile(firstname: string, lastname: string, email: string, tel: string): Promise<AxiosResponse> {
-  //   return httpService.put("/profile", {
-  //     firstname,
-  //     lastname,
-  //     email,
-  //     tel,
-  //   });
-  // }
-  // public updateAdminProfile(firstname: string, lastname: string, email: string, tel: string): Promise<AxiosResponse> {
-  //   return httpService.put("/profile", {
-  //     firstname,
-  //     lastname,
-  //     email,
-  //     tel,
-  //   });
-  // }
-  // public updateRootPassword(password: string, newpassword: string): Promise<AxiosResponse> {
-  //   return httpService.put("/profile/password", { password, newpassword });
-  // }
-  // public updateAdminPassword(password: string, newpassword: string): Promise<AxiosResponse> {
-  //   return httpService.put("/profile/password", {
-  //     password,
-  //     newpassword,
-  //   });
-  // }
 }
 
 export const authService = new AuthService();

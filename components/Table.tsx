@@ -27,20 +27,21 @@ interface ActionButton {
 export default function Table<T extends object>(props: TableProps<T>) {
   const { setDialog, dialog } = useGlobalContext();
 
+  const defaultDialog = {
+    show: false,
+    title: "Warning!",
+    message: "Are you sure you want to delete?",
+    iconType: "warning",
+    confirm: deleteData,
+    cancle: () => {
+      setDialog((prev) => ({
+        ...prev,
+        show: false,
+      }));
+    },
+  };
   useEffect(() => {
-    setDialog({
-      show: false,
-      title: "Warning!",
-      message: "Are you sure you want to delete?",
-      iconType: "warning",
-      confirm: deleteData,
-      cancle: () => {
-        setDialog((prev) => ({
-          ...prev,
-          show: false,
-        }));
-      },
-    });
+    setDialog(defaultDialog);
   }, []);
 
   let data: Object[] = [];
@@ -48,8 +49,8 @@ export default function Table<T extends object>(props: TableProps<T>) {
     data.push(Object.values(item));
   });
   function confirmDelete(id: number) {
-    setDialog((prev) => ({
-      ...prev,
+    setDialog(() => ({
+      ...defaultDialog,
       show: true,
       confirm() {
         deleteData(id);

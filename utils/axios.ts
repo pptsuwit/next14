@@ -1,5 +1,4 @@
 import axios from "axios";
-
 import { deleteCookie, getCookie } from "cookies-next";
 import { toast } from "react-toastify";
 
@@ -29,11 +28,10 @@ httpService.interceptors.response.use(
     if (response?.status === 401) {
       deleteCookie(process.env.TOKEN_NAME as string);
       localStorage.removeItem(process.env.TOKEN_NAME as string);
-      // window.location.replace("/backoffice");
-      // window.location.href = "/backoffice";
       toast.warn(`Redirecting to login` as string, {
         autoClose: 5000,
-        onClose: () => (window.location.href = "/backoffice/login"),
+        onClose: () =>
+          (window.location.href = process.env.REDIRECT_TO_LOGIN as string),
       });
     } else {
       if (data.error) {
@@ -43,15 +41,7 @@ httpService.interceptors.response.use(
         return Promise.reject(data.message);
       }
     }
-    // const errorMessage = response?.data?.message || response?.data;
-    // if (axios.isAxiosError(error)) {
-    //   if (response?.status === 401) {
-    //     localStorage.removeItem(process.env.TOKEN_NAME as string);
-    //     deleteCookie(process.env.TOKEN_NAME as string);
-    //   }
-    // }
     return Promise.reject(errorMessage);
   }
 );
-
 export default httpService;

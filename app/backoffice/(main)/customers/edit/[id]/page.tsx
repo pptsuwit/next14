@@ -38,7 +38,6 @@ export default function page({ params }: { params: { id: string } }) {
         success: "Update user successful",
       });
     } catch (error) {
-      console.log(error);
       toast.error(error as string, {
         autoClose: 3000,
       });
