@@ -21,7 +21,7 @@ export default function page() {
         pending: "Loading...",
         success: {
           render() {
-            toast.info(`Redirecting to users` as string, {
+            toast.info(`Redirecting to customers` as string, {
               autoClose: 3000,
               onClose: () => (window.location.href = returnWhenSuccess),
             });

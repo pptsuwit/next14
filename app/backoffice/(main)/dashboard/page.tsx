@@ -27,7 +27,7 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-export const options = {
+const options = {
   responsive: true,
   plugins: {
     legend: {
@@ -42,7 +42,7 @@ export const options = {
 
 const labels = ["January", "February", "March", "April", "May", "June", "July"];
 
-export const data = {
+const data = {
   labels,
   datasets: [
     {
@@ -65,7 +65,7 @@ export const data = {
     },
   ],
 };
-export const dataPie = {
+const dataPie = {
   labels: ["Dataset 1", "Dataset 2", "Dataset 3"],
   datasets: [
     {
@@ -98,7 +98,7 @@ export const dataPie = {
     },
   ],
 };
-export default function page() {
+export default function dashboard() {
   const { setTitle } = useGlobalContext();
   useEffect(() => {
     setTitle("Dashboard");

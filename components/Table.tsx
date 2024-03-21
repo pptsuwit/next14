@@ -62,7 +62,7 @@ export default function Table<T extends object>(props: TableProps<T>) {
     if (props.onDelete) props.onDelete(id);
   }
   const tableCells = data.map((cells, index) => {
-    let id = undefined;
+    let id: any = undefined;
     let cell;
     if (cells instanceof Array) {
       id = cells[0];
