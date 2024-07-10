@@ -11,12 +11,12 @@ export const schema = z.object({
     .string()
     .trim()
     .min(1, "FirstName is required")
-    .regex(new RegExp("^[a-zA-Z]+$"), "Only letters a-z are allowed"),
+    .regex(new RegExp(/^[a-z]+$/i), "Only letters (a-z) are allowed"),
   lastName: z
     .string()
     .trim()
     .min(1, "Lastname is required")
-    .regex(new RegExp("^[a-zA-Z]+$"), "Only letters a-z are allowed"),
+    .regex(new RegExp(/^[a-z]+$/i), "Only letters (a-z) are allowed"),
   address: z.string().trim().min(1, "Address is required"),
   birthdate: z.string().nullable(),
   phone: z

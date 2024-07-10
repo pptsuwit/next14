@@ -11,12 +11,12 @@ export const schema = z
       .string()
       .trim()
       .min(1, "FirstName is required")
-      .regex(new RegExp(".*[A-Za-z].*"), "Only letters (a-z) are allowed"),
+      .regex(new RegExp(/^[a-z]+$/i), "Only letters (a-z) are allowed"),
     lastName: z
       .string()
       .trim()
       .min(1, "Lastname is required")
-      .regex(new RegExp(".*[A-Za-z].*"), "Only letters (a-z) are allowed"),
+      .regex(new RegExp(/^[a-z]+$/i), "Only letters (a-z) are allowed"),
     password: z
       .string()
       .trim()
@@ -45,12 +45,12 @@ export const schemaEdit = z.object({
     .string()
     .trim()
     .min(1, "FirstName is required")
-    .regex(new RegExp(".*[A-Za-z].*"), "Only letters (a-z) are allowed"),
+    .regex(new RegExp(/^[a-z]+$/i), "Only letters (a-z) are allowed"),
   lastName: z
     .string()
     .trim()
     .min(1, "Lastname is required")
-    .regex(new RegExp(".*[A-Za-z].*"), "Only letters (a-z) are allowed"),
+    .regex(new RegExp(/^[a-z]+$/i), "Only letters (a-z) are allowed"),
   // password: z.string().nullable(),
   // confirmPassword: z.string().nullable(),
 });
