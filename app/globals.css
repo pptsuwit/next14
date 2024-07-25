@@ -8,3 +8,9 @@ body {
   width: 100%;
   margin: 0;
 }
+
+@layer components {
+  .test {
+    @apply border border-dashed border-red-500;
+  }
+}

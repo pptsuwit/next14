@@ -36,3 +36,10 @@ interface IUserLogin {
   token: string;
   user: IUserResponse;
 }
+
+interface RegisterForm {
+  username: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+}

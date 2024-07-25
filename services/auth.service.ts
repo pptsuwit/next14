@@ -2,19 +2,8 @@ import httpService from "@/utils/axios";
 import { deleteCookie, getCookie } from "cookies-next";
 
 class AuthService {
-  public register(
-    username: string,
-    password: string,
-    firstName: string,
-    lastName: string
-  ): Promise<IUser> {
-    const schema = {
-      username: username,
-      password: password,
-      firstName: firstName,
-      lastName: lastName,
-    };
-    return httpService.post("/register", schema);
+  public register(register: RegisterForm): Promise<IUser> {
+    return httpService.post("/register", register);
   }
   public login(username: string, password: string): Promise<ILoginResponse> {
     const schema = {
